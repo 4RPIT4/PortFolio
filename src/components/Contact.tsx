@@ -52,7 +52,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "Uttar Pradesh, India",
+      value: "Karnataka, Bangalore",
       href: null,
     },
   ];

@@ -42,7 +42,7 @@ const Footer = () => {
               Arpita Dev Studio ✨
             </a>
             <p className="text-sm sm:text-base text-muted-foreground">
-              Tech Student & Aspiring Frontend Developer based in Uttar Pradesh, India.
+              Tech Student & Aspiring Frontend Developer based in Karnataka, Bangalore.
             </p>
           </div>
 

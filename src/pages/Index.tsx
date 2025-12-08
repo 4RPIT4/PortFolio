@@ -16,7 +16,7 @@ const Index = () => {
         <title>Arpita Singh | Tech Student & Web Designer Portfolio</title>
         <meta
           name="description"
-          content="Arpita Singh is a BE CSE student and aspiring frontend developer from Uttar Pradesh, India. Explore her portfolio showcasing web design projects and technical skills."
+          content="Arpita Singh is a BE CSE student and aspiring frontend developer from Karnataka, Bangalore. Explore her portfolio showcasing web design projects and technical skills."
         />
         <meta
           name="keywords"

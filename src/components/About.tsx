@@ -6,7 +6,7 @@ const About = () => {
   
   const details = [
     { icon: Calendar, label: "Born", value: "December 23, 2005" },
-    { icon: MapPin, label: "Location", value: "Uttar Pradesh, India" },
+    { icon: MapPin, label: "Location", value: "Karnataka, Bangalore" },
     { icon: GraduationCap, label: "Education", value: "BE CSE, 4th Semester" },
     { icon: Heart, label: "Passion", value: "Frontend Design" },
   ];

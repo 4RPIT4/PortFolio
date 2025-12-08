@@ -34,17 +34,20 @@ A modern, responsive portfolio website showcasing the work and skills of Arpita 
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/Lalith-47/Arpita_Portfolio_website.git
 cd Arpita_Portfolio_website
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Start the development server
+
 ```bash
 npm run dev
 ```
