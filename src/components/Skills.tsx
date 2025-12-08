@@ -13,6 +13,8 @@ const Skills = () => {
     { name: "CSS", color: "bg-mint/30 text-accent-foreground border-mint/50" },
     { name: "JavaScript", color: "bg-soft-yellow/30 text-foreground border-soft-yellow/50" },
     { name: "MySQL", color: "bg-lavender/30 text-secondary-foreground border-lavender/50" },
+    { name: "Dart", color: "bg-primary/20 text-primary border-primary/30" },
+    { name: "Flutter", color: "bg-mint/30 text-accent-foreground border-mint/50" },
     { name: "Git & GitHub", color: "bg-muted text-muted-foreground border-border" },
   ];
 
