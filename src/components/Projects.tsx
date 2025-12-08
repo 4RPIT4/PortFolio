@@ -1,7 +1,33 @@
 import { ExternalLink, Github, Globe, Database, CheckSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef, useState } from "react";
 
 const Projects = () => {
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = cardsRef.current.indexOf(entry.target as HTMLDivElement);
+            if (index !== -1 && !visibleCards.includes(index)) {
+              setVisibleCards((prev) => [...prev, index]);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const projects = [
     {
       title: "Personal Portfolio Website",
@@ -11,6 +37,7 @@ const Projects = () => {
       icon: Globe,
       color: "from-coral/20 to-soft-pink/20",
       borderColor: "border-coral/30",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&auto=format&fit=crop",
     },
     {
       title: "To-Do List Web App",
@@ -20,6 +47,7 @@ const Projects = () => {
       icon: CheckSquare,
       color: "from-mint/20 to-soft-yellow/20",
       borderColor: "border-mint/30",
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
     },
     {
       title: "Student Database Management System",
@@ -29,6 +57,7 @@ const Projects = () => {
       icon: Database,
       color: "from-lavender/20 to-primary/20",
       borderColor: "border-lavender/30",
+      image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&auto=format&fit=crop",
     },
   ];
 
@@ -53,14 +82,28 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative rounded-3xl border ${project.borderColor} overflow-hidden bg-gradient-to-br ${project.color} backdrop-blur-sm hover:shadow-glow transition-all duration-300 hover:-translate-y-2`}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className={`group relative rounded-3xl border ${project.borderColor} overflow-hidden bg-gradient-to-br ${project.color} backdrop-blur-sm hover:shadow-glow transition-all duration-500 hover:-translate-y-2 hover:scale-105 ${
+                visibleCards.includes(index) ? 'animate-scale-in opacity-100' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
+              {/* Project Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent" />
+                {/* Icon Overlay */}
+                <div className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-card/90 backdrop-blur-sm flex items-center justify-center shadow-soft group-hover:scale-110 transition-transform">
+                  <project.icon className="w-6 h-6 text-primary" />
+                </div>
+              </div>
+
               {/* Card Content */}
               <div className="p-6">
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-card/80 backdrop-blur-sm flex items-center justify-center mb-4 shadow-soft group-hover:scale-110 transition-transform">
-                  <project.icon className="w-7 h-7 text-primary" />
-                </div>
 
                 {/* Title */}
                 <h3 className="font-display font-bold text-xl mb-3">

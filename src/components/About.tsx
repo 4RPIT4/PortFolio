@@ -1,6 +1,9 @@
 import { Calendar, MapPin, GraduationCap, Heart } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const About = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const details = [
     { icon: Calendar, label: "Born", value: "December 23, 2005" },
     { icon: MapPin, label: "Location", value: "Uttar Pradesh, India" },
@@ -9,10 +12,10 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 gradient-section">
+    <section id="about" className="py-20 gradient-section" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}>
           <span className="inline-block px-4 py-1.5 rounded-full bg-lavender/30 text-secondary-foreground text-sm font-medium mb-4">
             About Me
           </span>

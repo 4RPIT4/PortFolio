@@ -1,7 +1,38 @@
 import { ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [displayedText, setDisplayedText] = useState("");
+  const roles = ["Tech Student", "Web Designer", "Aspiring Frontend Developer"];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          if (displayedText.length < currentRole.length) {
+            setDisplayedText(currentRole.slice(0, displayedText.length + 1));
+          } else {
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          if (displayedText.length > 0) {
+            setDisplayedText(displayedText.slice(0, -1));
+          } else {
+            setIsDeleting(false);
+            setRoleIndex((roleIndex + 1) % roles.length);
+          }
+        }
+      },
+      isDeleting ? 50 : 100
+    );
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, roleIndex]);
+
   return (
     <section
       id="home"
@@ -24,28 +55,26 @@ const Hero = () => {
         </div>
 
         {/* Main Heading */}
-        <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+        <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 animate-fade-up animation-delay-100">
           Hi, I'm{" "}
           <span className="text-gradient">Arpita Singh</span>
         </h1>
 
-        {/* Subtitle */}
-        <div className="space-y-2 mb-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <p className="text-xl md:text-2xl font-medium text-foreground/80">
-            Tech Student & Web Designer
-          </p>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            Aspiring Frontend Developer
+        {/* Subtitle with Typing Animation */}
+        <div className="space-y-2 mb-8 animate-fade-up animation-delay-200">
+          <p className="text-xl md:text-2xl font-medium text-foreground/80 h-8">
+            <span className="text-gradient">{displayedText}</span>
+            <span className="animate-pulse">|</span>
           </p>
         </div>
 
         {/* Location */}
-        <p className="text-muted-foreground mb-10 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+        <p className="text-muted-foreground mb-10 animate-fade-up animation-delay-300">
           📍 Uttar Pradesh, India
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up animation-delay-400">
           <Button
             asChild
             size="lg"

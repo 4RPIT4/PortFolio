@@ -1,6 +1,9 @@
 import { Code, Palette, Users, Brain, BookOpen, Lightbulb } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const Skills = () => {
+  const { ref, isVisible } = useScrollReveal();
+  
   const technicalSkills = [
     { name: "C", color: "bg-coral/20 text-coral border-coral/30" },
     { name: "Java", color: "bg-primary/20 text-primary border-primary/30" },
@@ -26,10 +29,10 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-background">
+    <section id="skills" className="py-20 bg-background" ref={ref}>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}>
           <span className="inline-block px-4 py-1.5 rounded-full bg-mint/30 text-accent-foreground text-sm font-medium mb-4">
             My Skills
           </span>
@@ -63,7 +66,7 @@ const Skills = () => {
           {coreInterests.map((interest, index) => (
             <div
               key={index}
-              className="group p-6 rounded-3xl bg-card border border-border/50 shadow-card hover:shadow-glow transition-all hover:-translate-y-2"
+              className={`group p-6 rounded-3xl bg-card border border-border/50 shadow-card hover:shadow-glow transition-all hover:-translate-y-2 duration-500 ${isVisible ? 'animate-scale-in opacity-100' : 'opacity-0'}`}
             >
               <div className="w-14 h-14 rounded-2xl gradient-hero flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <interest.icon className="w-7 h-7 text-primary-foreground" />
