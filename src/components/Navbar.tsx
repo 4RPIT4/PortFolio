@@ -28,25 +28,25 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-card/90 backdrop-blur-lg shadow-soft py-3"
-          : "bg-transparent py-5"
+          ? "bg-card/90 backdrop-blur-lg shadow-soft py-2 sm:py-3"
+          : "bg-transparent py-4 sm:py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <a
           href="#home"
-          className="font-display font-bold text-2xl text-gradient"
+          className="font-display font-bold text-xl sm:text-2xl text-gradient"
         >
           Arpita ✨
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="font-medium text-muted-foreground hover:text-primary transition-colors relative group"
+              className="font-medium text-sm lg:text-base text-muted-foreground hover:text-primary transition-colors relative group"
             >
               {item.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-full" />
@@ -62,8 +62,9 @@ const Navbar = () => {
             variant="ghost"
             size="icon"
             onClick={() => setIsOpen(!isOpen)}
+            className="h-9 w-9"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
       </div>
@@ -71,12 +72,12 @@ const Navbar = () => {
       {/* Mobile Nav */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-card/95 backdrop-blur-lg shadow-lg animate-fade-up">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+          <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="font-medium text-muted-foreground hover:text-primary transition-colors py-2"
+                className="font-medium text-base text-muted-foreground hover:text-primary transition-colors py-2 px-2 rounded-lg hover:bg-primary/10"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
