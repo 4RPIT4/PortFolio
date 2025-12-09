@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Send, Linkedin, Instagram, Download } from "lucide-react";
-import emailjs from "@emailjs/browser";
+// import emailjs from "emailjs-com";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,9 +16,9 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Initialize EmailJS
-  useEffect(() => {
-    emailjs.init("CvP7oXOxGYZ6klsvk");
-  }, []);
+  // useEffect(() => {
+  //   emailjs.init("CvP7oXOxGYZ6klsvk");
+  // }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,38 +28,27 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate form data
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
       const templateParams = {
         to_name: "Arpita",
-        to_email: "arpita231220@gmail.com",
+        to_email: "arpita@example.com",
         from_name: formData.name,
         from_email: formData.email,
         title: `New message from ${formData.name}`,
         message: formData.message,
       };
 
-      console.log("🚀 Sending email with params:", templateParams);
+      console.log("Sending email with params:", templateParams);
 
-      const result = await emailjs.send(
-        "service_mjyxwe9", // Your Service ID
-        "template_wgdxv3f", // Your Template ID
-        templateParams
-      );
+      // const result = await emailjs.send(
+      //   "service_mjyxwe9", // Your Service ID
+      //   "service_mjyxwe9", // Your Template ID
+      //   templateParams
+      // );
 
-      console.log("✅ Email sent successfully:", result);
+      console.log("Email sent successfully:");
 
       toast({
         title: "Message sent! 🎉",
@@ -68,20 +57,13 @@ const Contact = () => {
 
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error("❌ EmailJS Error:", error);
-      
-      let errorMessage = "Unknown error occurred";
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      } else if (typeof error === "object" && error !== null) {
-        errorMessage = JSON.stringify(error);
-      }
-      
+      console.error("EmailJS Error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       console.log("Error details:", errorMessage);
       
       toast({
         title: "Error sending message",
-        description: errorMessage || "Something went wrong. Please try again later.",
+        description: `Failed to send: ${errorMessage}`,
         variant: "destructive",
       });
     } finally {
@@ -93,7 +75,7 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "arpita@example.com",
+      value: "arpita231220@gmail.com",
       href: "mailto:arpita@example.com",
     },
     {
@@ -105,7 +87,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Location",
-      value: "Karnataka, Bangalore",
+      value: "Bangalore, Karnataka",
       href: null,
     },
   ];
@@ -230,7 +212,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="John Doe"
+                  placeholder="Lets Connect"
                   required
                   className="rounded-xl bg-background/50 h-10 sm:h-11 text-sm sm:text-base"
                 />
@@ -248,7 +230,7 @@ const Contact = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="john@example.com"
+                  placeholder="you@example.com"
                   required
                   className="rounded-xl bg-background/50 h-10 sm:h-11 text-sm sm:text-base"
                 />

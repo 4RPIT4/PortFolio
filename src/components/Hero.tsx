@@ -109,7 +109,7 @@ const Hero = () => {
 
             {/* Location */}
             <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 animate-fade-up animation-delay-300">
-              📍 Karnataka, Bangalore
+              📍 Bangalore, Karnataka.
             </p>
 
             {/* Tagline */}

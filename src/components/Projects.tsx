@@ -30,10 +30,10 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Personal Portfolio Website",
+      title: "Yukti",
       description:
-        "A simple, responsive portfolio created using HTML, CSS, and JavaScript to showcase skills and academic achievements.",
-      tags: ["HTML", "CSS", "JavaScript"],
+        "SIH project: Smart College Management System using AI to enhance student engagement and streamline administrative tasks.",
+      tags: ["HTML5", "CSS3", "JavaScript","Node.js","MongoDB","React Js","Tailwind CSS"],
       icon: Globe,
       color: "from-coral/20 to-soft-pink/20",
       borderColor: "border-coral/30",
@@ -43,14 +43,14 @@ const Projects = () => {
       title: "To-Do List Web App",
       description:
         "A basic JavaScript application allowing users to add, edit, and delete tasks with a minimal, clean UI.",
-      tags: ["JavaScript", "HTML", "CSS"],
+      tags: ["Vanila JavaScript", "HTML", "CSS"],
       icon: CheckSquare,
       color: "from-mint/20 to-soft-yellow/20",
       borderColor: "border-mint/30",
       image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
     },
     {
-      title: "Student Database Management System",
+          title: "Hostel Management System",
       description:
         "A mini project demonstrating CRUD operations using MySQL for storing student records and Java for backend logic.",
       tags: ["MySQL", "Java", "CRUD"],

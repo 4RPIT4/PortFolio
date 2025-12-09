@@ -24,7 +24,7 @@ const Footer = () => {
     },
     {
       icon: Mail,
-      href: "mailto:arpita@example.com",
+      href: "mailto:arpita231220@gmail.com",
       label: "Email",
     },
   ];
@@ -42,7 +42,7 @@ const Footer = () => {
               Arpita Dev Studio ✨
             </a>
             <p className="text-sm sm:text-base text-muted-foreground">
-              Tech Student & Aspiring Frontend Developer based in Karnataka, Bangalore.
+              Tech Student & Aspiring Frontend Developer based in Bangalore, Karnataka.
             </p>
           </div>
 
@@ -92,7 +92,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
-          <p>© {currentYear} Arpita Singh. All rights reserved.</p>
+          <p>© {currentYear} Arpita Singh.</p>
           <p className="flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-primary fill-primary" /> by Arpita
           </p>
