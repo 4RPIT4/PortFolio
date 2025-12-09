@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Send, Linkedin, Instagram, Download } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,6 +15,11 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("CvP7oXOxGYZ6klsvk");
+  }, []);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -22,18 +28,65 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form data
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const templateParams = {
+        to_name: "Arpita",
+        to_email: "arpita231220@gmail.com",
+        from_name: formData.name,
+        from_email: formData.email,
+        title: `New message from ${formData.name}`,
+        message: formData.message,
+      };
 
-    toast({
-      title: "Message sent! 🎉",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
+      console.log("🚀 Sending email with params:", templateParams);
 
-    setFormData({ name: "", email: "", message: "" });
-    setIsSubmitting(false);
+      const result = await emailjs.send(
+        "service_mjyxwe9", // Your Service ID
+        "template_wgdxv3f", // Your Template ID
+        templateParams
+      );
+
+      console.log("✅ Email sent successfully:", result);
+
+      toast({
+        title: "Message sent! 🎉",
+        description: "Thank you for reaching out. I'll get back to you soon!",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("❌ EmailJS Error:", error);
+      
+      let errorMessage = "Unknown error occurred";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "object" && error !== null) {
+        errorMessage = JSON.stringify(error);
+      }
+      
+      console.log("Error details:", errorMessage);
+      
+      toast({
+        title: "Error sending message",
+        description: errorMessage || "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
